@@ -611,7 +611,7 @@ def load_lottie(url_list):
         except:
             continue
     
-    # Return a default animation as JSON with corrected boolean values
+    # Corrected default animation with Python boolean values
     return {
         "v": "5.5.7",
         "fr": 30,
@@ -644,5 +644,3 @@ def load_lottie(url_list):
             }]
         }]
     }
-
-# ... (rest of the code remains the same)
