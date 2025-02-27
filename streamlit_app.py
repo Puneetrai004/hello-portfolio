@@ -319,7 +319,7 @@ def load_lottie(url_list):
                 "p": {"a": 0, "k": [0, 0]},
                 "s": {"a": 0, "k": [100, 100]},
                 "c": {"a": 0, "k": [0, 0]},
-                "hd": false
+                "hd": False
             }]
         }]
     }
