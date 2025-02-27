@@ -34,16 +34,8 @@ portfolio/
 ├── app.py                  # Main Streamlit application
 ├── requirements.txt        # Dependencies
 ├── README.md               # This documentation
-├── timeline_data.json      # Timeline configuration
-├── style/
-│   └── style.css           # Custom CSS styles
-└── assets/
-    ├── profile.jpg         # Profile picture
-    ├── banner.jpg          # Banner image
-    ├── project1.jpg        # Project image
-    ├── project2.jpg        # Project image
-    ├── project3.jpg        # Project image
-    └── Puneet_Kumar_Rai_Resume.pdf  # Downloadable resume
+└── style/
+    └── style.css           # Custom CSS styles (optional)
 ```
 
 ## 🚀 Getting Started
