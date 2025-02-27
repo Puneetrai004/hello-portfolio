@@ -1,12 +1,11 @@
 import streamlit as st
-from PIL import Image
 import pandas as pd
 import plotly.express as px
-import plotly.graph_objects as go
-from streamlit_timeline import timeline
+import json
 from streamlit_lottie import st_lottie
 import requests
-import json
+import os
+from pathlib import Path
 
 # Page configuration
 st.set_page_config(page_title="Puneet Kumar Rai - Data Science Portfolio", 
@@ -15,22 +14,45 @@ st.set_page_config(page_title="Puneet Kumar Rai - Data Science Portfolio",
 
 # Custom CSS
 def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    try:
+        with open(file_name) as f:
+            st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+    except:
+        # Define fallback CSS if file not found
+        st.markdown("""
+        <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            color: #262730;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+        .stProgress > div > div {
+            background-color: #4169E1;
+        }
+        </style>
+        """, unsafe_allow_html=True)
 
-try:
-    local_css("style/style.css")
-except:
-    st.write("Style file not found, using default styles")
+# Try to use custom CSS, fallback to default if not found
+css_path = Path("style/style.css")
+if css_path.exists():
+    local_css(css_path)
+else:
+    local_css(None)  # Will use fallback CSS
 
 # Function to load Lottie animations
 def load_lottieurl(url):
-    r = requests.get(url)
-    if r.status_code != 200:
+    try:
+        r = requests.get(url)
+        if r.status_code != 200:
+            return None
+        return r.json()
+    except:
         return None
-    return r.json()
 
-# Load animations
+# Load animations with fallback
 lottie_coding = load_lottieurl("https://assets4.lottiefiles.com/packages/lf20_fcfjwiyb.json")
 lottie_data = load_lottieurl("https://assets5.lottiefiles.com/private_files/lf30_8npirptd.json")
 
@@ -39,8 +61,8 @@ with st.sidebar:
     st.title("Puneet Kumar Rai")
     st.subheader("Data Scientist | ML Engineer")
     
-    # Profile image placeholder - replace with actual image in production
-    st.image("assets/profile.jpg", width=200)
+    # Use a placeholder image instead of file
+    st.image("https://via.placeholder.com/200x200.png?text=Puneet+Rai", width=200)
     
     st.markdown("### Navigation")
     nav_selection = st.radio("", ["Home", "Projects", "Skills", "Experience", "Education", "Contact"])
@@ -51,14 +73,9 @@ with st.sidebar:
     st.markdown("🔗 [LinkedIn](https://www.linkedin.com/)")
     st.markdown("🔗 [GitHub](https://github.com/)")
     
-    st.markdown("### Download Resume")
-    with open("assets/Puneet_Kumar_Rai_Resume.pdf", "rb") as file:
-        btn = st.download_button(
-            label="Download Resume",
-            data=file,
-            file_name="Puneet_Kumar_Rai_Resume.pdf",
-            mime="application/pdf"
-        )
+    # Remove resume download for now
+    st.markdown("### Resume")
+    st.markdown("Available upon request")
 
 # Main content area based on navigation selection
 if nav_selection == "Home":
@@ -82,7 +99,10 @@ if nav_selection == "Home":
         Explore my projects and skills to see how I can leverage data for your organization!
         """)
     with col2:
-        st_lottie(lottie_coding, height=300, key="coding")
+        if lottie_coding:
+            st_lottie(lottie_coding, height=300, key="coding")
+        else:
+            st.image("https://via.placeholder.com/300x300.png?text=Data+Science", width=300)
     
     # Brief stats
     st.markdown("## At a Glance")
@@ -123,7 +143,7 @@ elif nav_selection == "Projects":
             
             """)
         with col2:
-            st.image("assets/project1.jpg", caption="Mineral Classification")
+            st.image("https://via.placeholder.com/400x300.png?text=Mineral+Classification", width=300)
             
         st.markdown("---")
     
@@ -143,7 +163,7 @@ elif nav_selection == "Projects":
             
             """)
         with col2:
-            st.image("assets/project2.jpg", caption="Twitter Sentiment Analysis")
+            st.image("https://via.placeholder.com/400x300.png?text=Twitter+Sentiment", width=300)
             
         st.markdown("---")
     
@@ -163,7 +183,7 @@ elif nav_selection == "Projects":
             
             """)
         with col2:
-            st.image("assets/project3.jpg", caption="Employee Performance Prediction")
+            st.image("https://via.placeholder.com/400x300.png?text=Employee+Performance", width=300)
             
         st.markdown("---")
 
@@ -245,84 +265,65 @@ elif nav_selection == "Skills":
         for skill in soft_skills:
             st.markdown(f"- {skill}")
             
-        st_lottie(lottie_data, height=300, key="data")
+        if lottie_data:
+            st_lottie(lottie_data, height=300, key="data")
+        else:
+            st.image("https://via.placeholder.com/300x300.png?text=Skills", width=300)
 
 elif nav_selection == "Experience":
     st.markdown("# Experience & Responsibilities")
     
-    # Timeline JSON
-    timeline_data = {
-        "title": {
-            "text": {
-                "headline": "Leadership & Experience Timeline",
-                "text": "My journey through various roles and responsibilities"
-            }
+    # Timeline without streamlit-timeline dependency
+    st.markdown("## Leadership & Experience Timeline")
+    
+    # Manual timeline display
+    experiences = [
+        {
+            "period": "November 2023 - February 2024",
+            "title": "PR Executive | Kashiyatra'24",
+            "description": """
+            - Collaborated with a team of 25 individuals to successfully execute the Annual Socio-Cultural Festival of IIT(BHU)
+            - Organized a series of 90+ Events in a span of 3 days involving a footfall of over 60,000+ people
+            - Effectively managed multiple guests and coordinated prominent pronite events
+            """
         },
-        "events": [
-            {
-                "start_date": {
-                    "year": "2023",
-                    "month": "11"
-                },
-                "end_date": {
-                    "year": "2024",
-                    "month": "2"
-                },
-                "text": {
-                    "headline": "PR Executive | Kashiyatra'24",
-                    "text": "<ul><li>Collaborated with a team of 25 individuals to successfully execute the Annual Socio-Cultural Festival of IIT(BHU)</li><li>Organized a series of 90+ Events in a span of 3 days involving a footfall of over 60,000+ people</li><li>Effectively managed multiple guests and coordinated prominent pronite events</li></ul>"
-                }
-            },
-            {
-                "start_date": {
-                    "year": "2023",
-                    "month": "8"
-                },
-                "end_date": {
-                    "year": "2024",
-                    "month": "5"
-                },
-                "text": {
-                    "headline": "Induction Mentor | SCS IMP 2023-24",
-                    "text": "<ul><li>Mentored 20+ freshers of the Mining Department on academics, extracurriculars, and overall career paths</li><li>Ensured prompt adjustment of freshers with the college culture by in-person Interaction</li><li>Made opportunities more accessible to freshers</li></ul>"
-                }
-            },
-            {
-                "start_date": {
-                    "year": "2023",
-                    "month": "1"
-                },
-                "end_date": {
-                    "year": "2023",
-                    "month": "3"
-                },
-                "text": {
-                    "headline": "PR Coordinator | Technex'23",
-                    "text": "<ul><li>Operated under the guidance of seniors to manage Technex'23, the annual Techno-Management Festival of IIT(BHU) Varanasi</li><li>Helped coordinate marketing and promotional activities</li></ul>"
-                }
-            },
-            {
-                "start_date": {
-                    "year": "2023",
-                    "month": "5"
-                },
-                "end_date": {
-                    "year": "2024",
-                    "month": "2" 
-                },
-                "text": {
-                    "headline": "Core Team Member - The Photography Club IIT(BHU)",
-                    "text": "<ul><li>Organized various workshops to boost club offerings and member participations</li><li>Contributed to the club's growth</li><li>Planned and managed key activities for successful events</li></ul>"
-                }
-            }
-        ]
-    }
+        {
+            "period": "August 2023 - May 2024",
+            "title": "Induction Mentor | SCS IMP 2023-24",
+            "description": """
+            - Mentored 20+ freshers of the Mining Department on academics, extracurriculars, and overall career paths
+            - Ensured prompt adjustment of freshers with the college culture by in-person Interaction
+            - Made opportunities more accessible to freshers
+            """
+        },
+        {
+            "period": "January 2023 - March 2023",
+            "title": "PR Coordinator | Technex'23",
+            "description": """
+            - Operated under the guidance of seniors to manage Technex'23, the annual Techno-Management Festival of IIT(BHU) Varanasi
+            - Helped coordinate marketing and promotional activities
+            """
+        },
+        {
+            "period": "May 2023 - Present",
+            "title": "Core Team Member - The Photography Club IIT(BHU)",
+            "description": """
+            - Organized various workshops to boost club offerings and member participations
+            - Contributed to the club's growth
+            - Planned and managed key activities for successful events
+            """
+        }
+    ]
     
-    with open('timeline_data.json', 'w') as f:
-        json.dump(timeline_data, f)
-    
-    # Display timeline
-    timeline(timeline_data, height=600)
+    for exp in experiences:
+        with st.container():
+            col1, col2 = st.columns([1, 3])
+            with col1:
+                st.markdown(f"### {exp['period']}")
+            with col2:
+                st.markdown(f"## {exp['title']}")
+                st.markdown(exp['description'])
+            st.markdown("---")
     
     # Achievements
     st.markdown("## Honors & Achievements")
@@ -397,17 +398,15 @@ elif nav_selection == "Contact":
     with col1:
         st.markdown("## Get in Touch")
         
-        # Contact form
-        contact_form = """
-        <form action="https://formsubmit.co/your-email@email.com" method="POST">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="text" name="name" placeholder="Your name" required>
-            <input type="email" name="email" placeholder="Your email" required>
-            <textarea name="message" placeholder="Your message here" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-        """
-        st.markdown(contact_form, unsafe_allow_html=True)
+        # Simple contact form with Streamlit components instead of HTML
+        st.markdown("### Contact Form")
+        name = st.text_input("Your Name")
+        email = st.text_input("Your Email")
+        message = st.text_area("Your Message")
+        submit = st.button("Send Message")
+        
+        if submit:
+            st.success("Thanks for your message! I'll get back to you soon.")
     
     with col2:
         st.markdown("## Contact Information")
