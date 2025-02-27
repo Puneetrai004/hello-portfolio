@@ -1,0 +1,15 @@
+portfolio/
+├── app.py
+├── requirements.txt
+├── README.md
+├── setup.sh
+├── timeline_data.json
+├── style/
+│   └── style.css
+└── assets/
+    ├── profile.jpg
+    ├── banner.jpg
+    ├── project1.jpg
+    ├── project2.jpg
+    ├── project3.jpg
+    └── Puneet_Kumar_Rai_Resume.pdf
