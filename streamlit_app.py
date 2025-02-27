@@ -600,3 +600,49 @@ if nav_selection == "Home":
         # Use Lottie animation with fallback
         if lottie_coding:
             st_lottie(lottie_coding, height=400, key="coding")
+# ... (keep all previous code the same until the load_lottie function)
+
+def load_lottie(url_list):
+    for url in url_list:
+        try:
+            r = requests.get(url)
+            if r.status_code == 200:
+                return r.json()
+        except:
+            continue
+    
+    # Return a default animation as JSON with corrected boolean values
+    return {
+        "v": "5.5.7",
+        "fr": 30,
+        "ip": 0,
+        "op": 60,
+        "w": 300,
+        "h": 300,
+        "nm": "Loading",
+        "ddd": 0,
+        "assets": [],
+        "layers": [{
+            "ddd": 0,
+            "ind": 1,
+            "ty": 4,
+            "nm": "Circle",
+            "sr": 1,
+            "ks": {
+                "o": {"a": 0, "k": 100},
+                "r": {"a": 1, "k": [{"t": 0, "s": [0]}, {"t": 60, "s": [360]}]},
+                "p": {"a": 0, "k": [150, 150, 0]},
+                "a": {"a": 0, "k": [0, 0, 0]},
+                "s": {"a": 0, "k": [100, 100, 100]}
+            },
+            "shapes": [{
+                "ty": "el",
+                "p": {"a": 0, "k": [0, 0]},
+                "s": {"a": 0, "k": [100, 100]},
+                "c": {"a": 0, "k": [0, 0]},
+                "hd": False  # Changed from false to False
+            }]
+        }]
+    }
+
+# ... (rest of the code remains the same)
