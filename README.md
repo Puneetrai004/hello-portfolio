@@ -6,7 +6,7 @@ A comprehensive data science portfolio built with Streamlit showcasing projects,
 
 ## 🔍 Live Demo
 
-Visit the live portfolio: [https://puneetrai-portfolio.streamlit.app/](https://puneetrai-portfolio.streamlit.app/)
+Visit the live portfolio: [https://puneet-kumar-rai-portfolio.streamlit.app/](https://puneet-kumar-rai.streamlit.app/)
 
 ## 🌟 Features
 
