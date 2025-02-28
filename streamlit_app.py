@@ -425,7 +425,7 @@ elif nav_selection == "📬 Contact":
         
         st.markdown("</div>", unsafe_allow_html=True)
     
-     with col2:
+    with col2:
         st.markdown("""
         <div class="card">
             <h3>🌐 Digital Presence</h3>
