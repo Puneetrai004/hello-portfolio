@@ -10,7 +10,6 @@ import random
 from datetime import datetime
 import base64
 import time
-import base64 
 
 # Page configuration
 st.set_page_config(
@@ -116,7 +115,28 @@ def set_custom_theme():
         -webkit-text-fill-color: transparent;
     }
     
-    /* Full CSS from previous implementations */
+    .social-button {
+        display: flex;
+        align-items: center;
+        padding: 0.8rem 1.2rem;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.05);
+        transition: all 0.3s ease;
+        color: white !important;
+        text-decoration: none !important;
+    }
+    
+    .social-button:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+    }
+    
+    .experience-card {
+        background: rgba(42, 52, 65, 0.7);
+        border-left: 4px solid #8E54E9;
+        padding: 1.5rem;
+        margin: 1rem 0;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -144,10 +164,9 @@ with st.sidebar:
     st.markdown('<h3 style="text-align: center; color: #81d4fa;">Data Scientist | ML Engineer</h3>', unsafe_allow_html=True)
     
     # Profile Image
-    # Replace existing profile image code (Line 105-110)
     st.markdown("""
     <div style="text-align: center; margin: 1.5rem 0;">
-        <img src="assets/profile.jpg" 
+        <img src="https://raw.githubusercontent.com/Puneetrai004/portfolio/main/assets/profile.jpg" 
             style="width: 80%; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);">
     </div>
     """, unsafe_allow_html=True)
@@ -306,16 +325,18 @@ elif nav_selection == "💼 Experience":
     with st.container():
         col1, col2 = st.columns([1,3])
         with col1:
-            st.image("https://via.placeholder.com/150x150.png?text=KY", width=120)
+            st.image("https://img.icons8.com/3d-fluency/94/conference.png", width=100)
         with col2:
             st.markdown("""
-            <div class="card">
+            <div class="experience-card">
                 <h3>🎪 PR Executive - Kashiyatra'24</h3>
+                <div class="badge">Nov 2023 - Feb 2024</div>
                 <div class="badge">60,000+ Participants</div>
                 <ul>
                     <li>Led 25-member team for Asia's largest college fest</li>
                     <li>Coordinated 90+ events across 3 days</li>
                     <li>Managed VIP guests and media relations</li>
+                    <li>Handled budget of ₹50+ lakhs</li>
                 </ul>
             </div>
             """, unsafe_allow_html=True)
@@ -323,30 +344,23 @@ elif nav_selection == "💼 Experience":
     st.markdown("---")
     
     with st.container():
-        st.markdown("""
-        <div class="card">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-                <div>
-                    <h3>👨🏫 Induction Mentor</h3>
-                    <div class="badge">20+ Freshers</div>
-                    <ul>
-                        <li>Academic guidance & career counseling</li>
-                        <li>Organized department orientation</li>
-                        <li>Resource development for juniors</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3>🤝 PR Coordinator</h3>
-                    <div class="badge">Technex'23</div>
-                    <ul>
-                        <li>Managed sponsor relations</li>
-                        <li>Coordinated technical workshops</li>
-                        <li>Social media management</li>
-                    </ul>
-                </div>
+        col1, col2 = st.columns([1,3])
+        with col1:
+            st.image("https://img.icons8.com/3d-fluency/94/student-male--v3.png", width=100)
+        with col2:
+            st.markdown("""
+            <div class="experience-card">
+                <h3>👨🏫 Induction Mentor</h3>
+                <div class="badge">Aug 2023 - May 2024</div>
+                <div class="badge">20+ Freshers</div>
+                <ul>
+                    <li>Academic guidance & career counseling</li>
+                    <li>Organized department orientation</li>
+                    <li>Resource development for juniors</li>
+                    <li>Conducted weekly mentorship sessions</li>
+                </ul>
             </div>
-        </div>
-        """, unsafe_allow_html=True)
+            """, unsafe_allow_html=True)
 
 elif nav_selection == "🎓 Education":
     st.header("🎓 Academic Journey")
@@ -386,7 +400,6 @@ elif nav_selection == "📬 Contact":
     
     col1, col2 = st.columns(2)
     with col1:
-        # Add this code block to read the PDF file
         with open("Puneet_Rai_Resume.pdf", "rb") as pdf_file:
             PDFbyte = pdf_file.read()
         
@@ -403,7 +416,6 @@ elif nav_selection == "📬 Contact":
             <h3 style="margin-top: 1.5rem;">📎 Attachments</h3>
         """, unsafe_allow_html=True)
         
-        # Replace the existing button with this download button
         st.download_button(
             label="📄 Download Full Resume",
             data=PDFbyte,
@@ -417,22 +429,4 @@ elif nav_selection == "📬 Contact":
         st.markdown("""
         <div class="card">
             <h3>🌐 Digital Presence</h3>
-            <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
-                <a href="#" class="social-button" style="text-decoration: none;">
-                    <span>🔗 LinkedIn</span>
-                </a>
-                <a href="#" class="social-button" style="text-decoration: none;">
-                    <span>🐱 GitHub</span>
-                </a>
-                <a href="#" class="social-button" style="text-decoration: none;">
-                    <span>📷 Instagram</span>
-                </a>
-            </div>
-            <h3 style="margin-top: 1.5rem;">📅 Schedule Meeting</h3>
-            <button class="stButton" style="width: 100%; padding: 1rem;">
-                🗓️ Book Calendar Slot
-            </button>
-        </div>
-        """, unsafe_allow_html=True)
-
-# Run with: streamlit run app.py
+            <div style="display: grid; gap: 1rem; margin
