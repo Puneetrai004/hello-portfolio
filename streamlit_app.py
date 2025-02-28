@@ -137,6 +137,23 @@ def set_custom_theme():
         padding: 1.5rem;
         margin: 1rem 0;
     }
+    
+    .project-link {
+        display: inline-block;
+        background: linear-gradient(to right, #4776E6, #8E54E9);
+        color: white !important;
+        text-decoration: none !important;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 500;
+        margin-top: 1rem;
+        transition: all 0.3s ease;
+    }
+    
+    .project-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -278,6 +295,54 @@ elif nav_selection == "🚀 Projects":
             </div>
         </div>
         """, unsafe_allow_html=True)
+    
+    with st.expander("Blast Design Calculator for Open Cast Mines"):
+        col1, col2 = st.columns([3,2])
+        with col1:
+            st.markdown("""
+            <div class="card">
+                <h3>💥 Blast Design Calculator</h3>
+                <div class="badge">Mining Engineering Tool</div>
+                <ul>
+                    <li>Interactive Streamlit app for mining engineers</li>
+                    <li>Implements industry-standard formulas (Atlas Copco, Konya, etc.)</li>
+                    <li>Visual blast pattern representation and optimization</li>
+                    <li>Comprehensive input parameters for rock properties and explosives</li>
+                </ul>
+                <div style="margin-top: 1rem;">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Streamlit</span>
+                    <span class="skill-tag">Mining Engineering</span>
+                </div>
+                <a href="https://puneetrai004-blast-design-calculator-streamlit-app-sg5flm.streamlit.app/" target="_blank" class="project-link">🔗 View Live App</a>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.image("https://via.placeholder.com/600x400.png?text=Blast+Design+Calculator", use_column_width=True)
+    
+    with st.expander("Rock Mass Rating (RMR) Calculator"):
+        col1, col2 = st.columns([3,2])
+        with col1:
+            st.markdown("""
+            <div class="card">
+                <h3>🏔️ RMR & Roof Bolt Support Calculator</h3>
+                <div class="badge">Geotechnical Engineering Tool</div>
+                <ul>
+                    <li>Interactive calculation of Bieniawski's Rock Mass Rating</li>
+                    <li>Automated roof bolt support recommendations</li>
+                    <li>Visual representation of bolt patterns</li>
+                    <li>Complete support design for mining and tunneling operations</li>
+                </ul>
+                <div style="margin-top: 1rem;">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Streamlit</span>
+                    <span class="skill-tag">Geotechnical Engineering</span>
+                </div>
+                <a href="https://puneetrai004-rmr-roof-bolt-support-calcula-streamlit-app-jlqpiy.streamlit.app/" target="_blank" class="project-link">🔗 View Live App</a>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.image("https://via.placeholder.com/600x400.png?text=RMR+Calculator", use_column_width=True)
 
 elif nav_selection == "🛠️ Skills":
     st.header("🛠️ Technical Arsenal")
