@@ -170,7 +170,7 @@ with st.sidebar:
         import os
         
         # Check for profile image in different possible locations
-        possible_paths = ["assets/profile.jpg", "profile.jpg", "./profile.jpg"]
+        possible_paths = ["assets/profile.png", "profile.png", "./profile.png"]
         
         profile_found = False
         for path in possible_paths:
@@ -181,7 +181,7 @@ with st.sidebar:
                 break
         
         if not profile_found:
-            st.warning("Profile image not found. Please add profile.jpg to your directory.")
+            st.warning("Profile image not found. Please add profile.png to your directory.")
     except Exception as e:
         st.error(f"Error loading profile image: {e}")
     
