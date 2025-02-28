@@ -166,7 +166,7 @@ with st.sidebar:
     # Profile Image
     st.markdown("""
     <div style="text-align: center; margin: 1.5rem 0;">
-        <img src="https://raw.githubusercontent.com/Puneetrai004/portfolio/main/assets/profile.jpg" 
+        <img src="https://raw.github.com/Puneetrai004/hello-portfolio/assets/profile.jpg" 
             style="width: 80%; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);">
     </div>
     """, unsafe_allow_html=True)
