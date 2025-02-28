@@ -425,8 +425,26 @@ elif nav_selection == "📬 Contact":
         
         st.markdown("</div>", unsafe_allow_html=True)
     
-    with col2:
+     with col2:
         st.markdown("""
         <div class="card">
             <h3>🌐 Digital Presence</h3>
-            <div style="display: grid; gap: 1rem; margin
+            <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
+                <a href="#" class="social-button" style="text-decoration: none;">
+                    <span>🔗 LinkedIn</span>
+                </a>
+                <a href="#" class="social-button" style="text-decoration: none;">
+                    <span>🐱 GitHub</span>
+                </a>
+                <a href="#" class="social-button" style="text-decoration: none;">
+                    <span>📷 Instagram</span>
+                </a>
+            </div>
+            <h3 style="margin-top: 1.5rem;">📅 Schedule Meeting</h3>
+            <button class="stButton" style="width: 100%; padding: 1rem;">
+                🗓️ Book Calendar Slot
+            </button>
+        </div>
+        """, unsafe_allow_html=True)
+
+# Run with: streamlit run app.py
