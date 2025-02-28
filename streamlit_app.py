@@ -10,6 +10,7 @@ import random
 from datetime import datetime
 import base64
 import time
+import base64 
 
 # Page configuration
 st.set_page_config(
@@ -18,6 +19,13 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+def get_binary_file_downloader_html(bin_file, file_label='File'):
+    with open(bin_file, 'rb') as f:
+        data = f.read()
+    bin_str = base64.b64encode(data).decode()
+    href = f'<a href="data:application/octet-stream;base64,{bin_str}" download="{os.path.basename(bin_file)}">Download {file_label}</a>'
+    return href
 
 # Custom CSS with modern dark theme
 def set_custom_theme():
@@ -136,10 +144,11 @@ with st.sidebar:
     st.markdown('<h3 style="text-align: center; color: #81d4fa;">Data Scientist | ML Engineer</h3>', unsafe_allow_html=True)
     
     # Profile Image
+    # Replace existing profile image code (Line 105-110)
     st.markdown("""
     <div style="text-align: center; margin: 1.5rem 0;">
-        <img src="https://via.placeholder.com/200x200.png?text=PKR+Profile" 
-             style="width: 80%; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);">
+        <img src="assets/profile.jpg" 
+            style="width: 80%; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);">
     </div>
     """, unsafe_allow_html=True)
     
@@ -377,6 +386,10 @@ elif nav_selection == "📬 Contact":
     
     col1, col2 = st.columns(2)
     with col1:
+        # Add this code block to read the PDF file
+        with open("Puneet_Rai_Resume.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+        
         st.markdown("""
         <div class="card">
             <h3>📌 Contact Information</h3>
@@ -388,11 +401,17 @@ elif nav_selection == "📬 Contact":
                 Ghazipur, Uttar Pradesh 233227
             </div>
             <h3 style="margin-top: 1.5rem;">📎 Attachments</h3>
-            <button class="stButton" style="width: 100%; padding: 1rem;">
-                📄 Download Full Resume
-            </button>
-        </div>
         """, unsafe_allow_html=True)
+        
+        # Replace the existing button with this download button
+        st.download_button(
+            label="📄 Download Full Resume",
+            data=PDFbyte,
+            file_name="Puneet_Rai_Resume.pdf",
+            mime="application/octet-stream",
+        )
+        
+        st.markdown("</div>", unsafe_allow_html=True)
     
     with col2:
         st.markdown("""
