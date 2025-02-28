@@ -159,17 +159,31 @@ def timeline_item(period, title, description):
     """, unsafe_allow_html=True)
 
 # Sidebar
+# In your sidebar section, replace the profile image part with:
 with st.sidebar:
     st.markdown('<h1 style="text-align: center;">Puneet Kumar Rai</h1>', unsafe_allow_html=True)
     st.markdown('<h3 style="text-align: center; color: #81d4fa;">Data Scientist | ML Engineer</h3>', unsafe_allow_html=True)
     
-    # Profile Image
-    st.markdown("""
-    <div style="text-align: center; margin: 1.5rem 0;">
-        <img src="https://raw.github.com/Puneetrai004/hello-portfolio/assets/profile.jpg" 
-            style="width: 80%; border-radius: 10px; box-shadow: 0 8px 20px rgba(0,0,0,0.4);">
-    </div>
-    """, unsafe_allow_html=True)
+    # Profile Image - Updated to use local file
+    try:
+        from PIL import Image
+        import os
+        
+        # Check for profile image in different possible locations
+        possible_paths = ["assets/profile.jpg", "profile.jpg", "./profile.jpg"]
+        
+        profile_found = False
+        for path in possible_paths:
+            if os.path.exists(path):
+                profile_image = Image.open(path)
+                st.image(profile_image, width=None, use_column_width=True)
+                profile_found = True
+                break
+        
+        if not profile_found:
+            st.warning("Profile image not found. Please add profile.jpg to your directory.")
+    except Exception as e:
+        st.error(f"Error loading profile image: {e}")
     
     # Navigation
     nav_selection = st.radio("", ["🏠 Home", "🚀 Projects", "🛠️ Skills", "💼 Experience", "🎓 Education", "📬 Contact"])
