@@ -430,13 +430,13 @@ elif nav_selection == "📬 Contact":
         <div class="card">
             <h3>🌐 Digital Presence</h3>
             <div style="display: grid; gap: 1rem; margin-top: 1.5rem;">
-                <a href="#" class="social-button" style="text-decoration: none;">
+                <a href="https://www.linkedin.com/in/puneet-kumar-rai/" class="social-button" style="text-decoration: none;" target="_blank">
                     <span>🔗 LinkedIn</span>
                 </a>
-                <a href="#" class="social-button" style="text-decoration: none;">
+                <a href="https://github.com/Puneetrai004" class="social-button" style="text-decoration: none;" target="_blank">
                     <span>🐱 GitHub</span>
                 </a>
-                <a href="#" class="social-button" style="text-decoration: none;">
+                <a href="https://www.instagram.com/nocturnal_clicks/" class="social-button" style="text-decoration: none;" target="_blank">
                     <span>📷 Instagram</span>
                 </a>
             </div>
